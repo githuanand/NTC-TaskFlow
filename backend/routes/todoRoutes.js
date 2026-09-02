@@ -1,22 +1,115 @@
+// ============================================================
+// FILE: backend/routes/todoRoutes.js
+// PURPOSE: CRUD API routes for TaskManager tasks
+// ============================================================
+
 const express = require("express");
+const Todo = require("../models/Todo");
+
 const router = express.Router();
 
-let todos = [];
+// ============================================================
+// GET ALL TASKS
+// GET /api/tasks
+// ============================================================
 
-// GET /api/todos
-router.get("/", (req, res) => {
-  res.json(todos);
+router.get("/", async (req, res) => {
+  try {
+    const todos = await Todo.find().sort({ createdAt: -1 });
+
+    res.json(todos);
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+
+    res.status(500).json({
+      message: "Failed to fetch tasks",
+    });
+  }
 });
 
-// POST /api/todos
-router.post("/", (req, res) => {
-  const { title } = req.body;
-  if (!title) {
-    return res.status(400).json({ message: "Title is required" });
+// ============================================================
+// CREATE TASK
+// POST /api/tasks
+// ============================================================
+
+router.post("/", async (req, res) => {
+  try {
+    const { title } = req.body;
+
+    if (!title || !title.trim()) {
+      return res.status(400).json({
+        message: "Title is required",
+      });
+    }
+
+    const todo = await Todo.create({
+      title: title.trim(),
+    });
+
+    res.status(201).json(todo);
+  } catch (error) {
+    console.error("Error creating task:", error);
+
+    res.status(500).json({
+      message: "Failed to create task",
+    });
   }
-  const newTodo = { id: Date.now(), title, completed: false };
-  todos.push(newTodo);
-  res.status(201).json(newTodo);
+});
+
+// ============================================================
+// TOGGLE TASK
+// PUT /api/tasks/:id
+// ============================================================
+
+router.put("/:id", async (req, res) => {
+  try {
+    const todo = await Todo.findById(req.params.id);
+
+    if (!todo) {
+      return res.status(404).json({
+        message: "Task not found",
+      });
+    }
+
+    todo.completed = !todo.completed;
+
+    await todo.save();
+
+    res.json(todo);
+  } catch (error) {
+    console.error("Error updating task:", error);
+
+    res.status(500).json({
+      message: "Failed to update task",
+    });
+  }
+});
+
+// ============================================================
+// DELETE TASK
+// DELETE /api/tasks/:id
+// ============================================================
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const todo = await Todo.findByIdAndDelete(req.params.id);
+
+    if (!todo) {
+      return res.status(404).json({
+        message: "Task not found",
+      });
+    }
+
+    res.json({
+      message: "Task deleted successfully",
+    });
+  } catch (error) {
+    console.error("Error deleting task:", error);
+
+    res.status(500).json({
+      message: "Failed to delete task",
+    });
+  }
 });
 
 module.exports = router;
