@@ -1,4 +1,4 @@
-**NTC Task Manager — AI-Powered Task Management, Progress Analysis, Work Assignment & Results Tracking Platform
+NTC Task Manager — AI-Powered Task Management, Progress Analysis, Work Assignment & Results Tracking Platform
 
 A full-stack academic task management platform developed for NTC – Narayan Tuition Classes, designed to provide a structured digital environment for task assignment, progress monitoring, work management, and results tracking.
 
@@ -41,4 +41,3 @@ Generative AI
 AI-powered task and progress analysis
 Advanced analytics
 Google Classroom integration
-**
