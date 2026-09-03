@@ -1,6 +1,6 @@
-# 📋 NTC Task Manager
+# 🚀 NTC TaskFlow
 
-NTC Task Manager is a full-stack task management platform developed for **NTC – Narayan Tuition Classes** to organize, manage, and track academic tasks efficiently.
+NTC TaskFlow is a full-stack task management platform developed for **NTC – Narayan Tuition Classes** to organize, manage, and track academic tasks efficiently.
 
 ## 🌐 Live Demo
 
