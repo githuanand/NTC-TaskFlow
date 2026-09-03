@@ -20,34 +20,83 @@ const TASK_API = "http://localhost:5000/api/tasks";
 // ============================================================
 
 function App() {
-  const path = window.location.pathname;
-  const hash = window.location.hash;
+  // ==========================================================
+  // ROUTING STATE
+  // ==========================================================
 
-  // ----------------------------------------------------------
-  // NTC PORTAL / TASK MANAGER
-  // Supports:
+  const [currentPath, setCurrentPath] = useState(
+    window.location.pathname
+  );
+
+  const [currentHash, setCurrentHash] = useState(
+    window.location.hash
+  );
+
+  // ==========================================================
+  // ROUTING LISTENER
+  // ==========================================================
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setCurrentPath(window.location.pathname);
+      setCurrentHash(window.location.hash);
+    };
+
+    window.addEventListener(
+      "hashchange",
+      handleLocationChange
+    );
+
+    window.addEventListener(
+      "popstate",
+      handleLocationChange
+    );
+
+    return () => {
+      window.removeEventListener(
+        "hashchange",
+        handleLocationChange
+      );
+
+      window.removeEventListener(
+        "popstate",
+        handleLocationChange
+      );
+    };
+  }, []);
+
+  // ==========================================================
+  // NTC PORTAL = TASK MANAGER
+  //
+  // Supported URLs:
+  //
+  // /
   // /#ntcportal
   // /ntcportal
-  // ----------------------------------------------------------
+  //
+  // ==========================================================
 
   if (
-    path === "/ntcportal" ||
-    hash === "#ntcportal"
+    currentPath === "/ntcportal" ||
+    currentHash === "#ntcportal"
   ) {
     return <TaskManagerApp />;
   }
 
-  // ----------------------------------------------------------
+  // ==========================================================
   // MAIN PORTAL
-  // ----------------------------------------------------------
+  // ==========================================================
 
-  if (path === "/" && hash === "") {
+  if (
+    currentPath === "/" &&
+    currentHash === ""
+  ) {
     return <PortalSelection />;
   }
 
-  // ----------------------------------------------------------
+  // ==========================================================
   // DEFAULT
-  // ----------------------------------------------------------
+  // ==========================================================
 
   return <PortalSelection />;
 }
@@ -62,17 +111,24 @@ function TaskManagerApp() {
   // ==========================================================
 
   const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem("taskmanager_user");
+    const savedUser = localStorage.getItem(
+      "taskmanager_user"
+    );
 
     try {
-      return savedUser ? JSON.parse(savedUser) : null;
+      return savedUser
+        ? JSON.parse(savedUser)
+        : null;
     } catch {
       return null;
     }
   });
 
   const [token, setToken] = useState(
-    () => localStorage.getItem("taskmanager_token") || ""
+    () =>
+      localStorage.getItem(
+        "taskmanager_token"
+      ) || ""
   );
 
   const [authMode, setAuthMode] = useState("login");
@@ -107,7 +163,10 @@ function TaskManagerApp() {
   // ==========================================================
 
   const saveAuth = (authToken, authUser) => {
-    localStorage.setItem("taskmanager_token", authToken);
+    localStorage.setItem(
+      "taskmanager_token",
+      authToken
+    );
 
     localStorage.setItem(
       "taskmanager_user",
@@ -123,8 +182,13 @@ function TaskManagerApp() {
   // ==========================================================
 
   const logout = () => {
-    localStorage.removeItem("taskmanager_token");
-    localStorage.removeItem("taskmanager_user");
+    localStorage.removeItem(
+      "taskmanager_token"
+    );
+
+    localStorage.removeItem(
+      "taskmanager_user"
+    );
 
     setToken("");
     setUser(null);
@@ -146,8 +210,13 @@ function TaskManagerApp() {
   // ==========================================================
 
   const backToPortals = () => {
-    localStorage.removeItem("taskmanager_token");
-    localStorage.removeItem("taskmanager_user");
+    localStorage.removeItem(
+      "taskmanager_token"
+    );
+
+    localStorage.removeItem(
+      "taskmanager_user"
+    );
 
     setToken("");
     setUser(null);
