@@ -21,81 +21,55 @@ const TASK_API = "http://localhost:5000/api/tasks";
 
 function App() {
   // ==========================================================
-  // ROUTING STATE
+  // HASH ROUTING STATE
   // ==========================================================
 
-  const [currentPath, setCurrentPath] = useState(
-    window.location.pathname
-  );
+  const getCurrentRoute = () => {
+    const hash = window.location.hash.toLowerCase();
 
-  const [currentHash, setCurrentHash] = useState(
-    window.location.hash
-  );
+    if (hash === "#ntcportal") {
+      return "ntcportal";
+    }
+
+    return "main";
+  };
+
+  const [route, setRoute] = useState(getCurrentRoute);
 
   // ==========================================================
-  // ROUTING LISTENER
+  // LISTEN FOR HASH CHANGES
   // ==========================================================
 
   useEffect(() => {
-    const handleLocationChange = () => {
-      setCurrentPath(window.location.pathname);
-      setCurrentHash(window.location.hash);
+    const handleHashChange = () => {
+      setRoute(getCurrentRoute());
     };
 
-    window.addEventListener(
-      "hashchange",
-      handleLocationChange
-    );
-
-    window.addEventListener(
-      "popstate",
-      handleLocationChange
-    );
+    window.addEventListener("hashchange", handleHashChange);
 
     return () => {
       window.removeEventListener(
         "hashchange",
-        handleLocationChange
-      );
-
-      window.removeEventListener(
-        "popstate",
-        handleLocationChange
+        handleHashChange
       );
     };
   }, []);
 
   // ==========================================================
-  // NTC PORTAL = TASK MANAGER
+  // NTC PORTAL / TASK MANAGER
   //
-  // Supported URLs:
-  //
-  // /
-  // /#ntcportal
-  // /ntcportal
-  //
+  // ONLY:
+  // https://your-domain.vercel.app/#ntcportal
   // ==========================================================
 
-  if (
-    currentPath === "/ntcportal" ||
-    currentHash === "#ntcportal"
-  ) {
+  if (route === "ntcportal") {
     return <TaskManagerApp />;
   }
 
   // ==========================================================
   // MAIN PORTAL
-  // ==========================================================
-
-  if (
-    currentPath === "/" &&
-    currentHash === ""
-  ) {
-    return <PortalSelection />;
-  }
-
-  // ==========================================================
-  // DEFAULT
+  //
+  // https://your-domain.vercel.app/
   // ==========================================================
 
   return <PortalSelection />;
@@ -111,24 +85,17 @@ function TaskManagerApp() {
   // ==========================================================
 
   const [user, setUser] = useState(() => {
-    const savedUser = localStorage.getItem(
-      "taskmanager_user"
-    );
+    const savedUser = localStorage.getItem("taskmanager_user");
 
     try {
-      return savedUser
-        ? JSON.parse(savedUser)
-        : null;
+      return savedUser ? JSON.parse(savedUser) : null;
     } catch {
       return null;
     }
   });
 
   const [token, setToken] = useState(
-    () =>
-      localStorage.getItem(
-        "taskmanager_token"
-      ) || ""
+    () => localStorage.getItem("taskmanager_token") || ""
   );
 
   const [authMode, setAuthMode] = useState("login");
@@ -182,13 +149,8 @@ function TaskManagerApp() {
   // ==========================================================
 
   const logout = () => {
-    localStorage.removeItem(
-      "taskmanager_token"
-    );
-
-    localStorage.removeItem(
-      "taskmanager_user"
-    );
+    localStorage.removeItem("taskmanager_token");
+    localStorage.removeItem("taskmanager_user");
 
     setToken("");
     setUser(null);
@@ -202,7 +164,8 @@ function TaskManagerApp() {
     setError("");
     setSuccess("");
 
-    window.location.href = "/#ntcportal";
+    // Stay inside TaskManager login after logout
+    window.location.hash = "ntcportal";
   };
 
   // ==========================================================
@@ -210,13 +173,8 @@ function TaskManagerApp() {
   // ==========================================================
 
   const backToPortals = () => {
-    localStorage.removeItem(
-      "taskmanager_token"
-    );
-
-    localStorage.removeItem(
-      "taskmanager_user"
-    );
+    localStorage.removeItem("taskmanager_token");
+    localStorage.removeItem("taskmanager_user");
 
     setToken("");
     setUser(null);
@@ -225,7 +183,8 @@ function TaskManagerApp() {
     setError("");
     setSuccess("");
 
-    window.location.href = "/";
+    // Return to MAIN PORTAL
+    window.location.hash = "";
   };
 
   // ==========================================================
