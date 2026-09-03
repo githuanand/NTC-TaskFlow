@@ -1,12 +1,11 @@
 /* ============================================================
    NTC DIGITAL PLATFORM
    FILE: frontend/src/index.css
-   PURPOSE:
-   Global styling + Portal Selection + Authentication + Dashboard
+   PURPOSE: Global styling + Portal Selection + Auth + Dashboard
    ============================================================ */
 
 /* ============================================================
-   FONT
+   GOOGLE FONT
    ============================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
@@ -34,11 +33,11 @@ html {
 }
 
 body {
-  margin: 0;
-
   font-family: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
 
   color: #172033;
+
+  background: #eef4ff;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -57,22 +56,19 @@ button {
 
 
 /* ============================================================
-   ============================================================
-   PORTAL SELECTION PAGE
-   ============================================================
+   PORTAL PAGE
    ============================================================ */
 
 .portal-page {
   position: relative;
 
-  width: 100%;
   min-height: 100vh;
 
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
-  padding: 35px 20px;
+  padding: 45px 20px;
 
   overflow: hidden;
 
@@ -125,7 +121,7 @@ button {
 
 
 /* ============================================================
-   PORTAL DECORATION
+   BACKGROUND DECORATION
    ============================================================ */
 
 .portal-page::before {
@@ -187,11 +183,10 @@ button {
 
 .portal-container {
   position: relative;
-
   z-index: 2;
 
   width: 100%;
-  max-width: 500px;
+  max-width: 620px;
 }
 
 
@@ -203,14 +198,14 @@ button {
   display: flex;
   align-items: center;
 
-  gap: 12px;
+  gap: 14px;
 
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
 .portal-logo {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
 
   display: flex;
   align-items: center;
@@ -218,7 +213,7 @@ button {
 
   flex-shrink: 0;
 
-  border-radius: 10px;
+  border-radius: 13px;
 
   background:
     linear-gradient(
@@ -229,19 +224,19 @@ button {
 
   color: #ffffff;
 
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 800;
 
   letter-spacing: -0.4px;
 
   box-shadow:
-    0 7px 16px rgba(37, 99, 235, 0.25);
+    0 8px 20px rgba(37, 99, 235, 0.25);
 }
 
 .portal-header h1 {
   margin: 0;
 
-  font-size: 18px;
+  font-size: 22px;
   line-height: 1.15;
 
   font-weight: 700;
@@ -252,42 +247,44 @@ button {
 }
 
 .portal-header p {
-  margin: 3px 0 0;
+  margin: 4px 0 0;
 
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1.3;
+
+  font-weight: 400;
 
   color: #64748b;
 }
 
 
 /* ============================================================
-   PORTAL WELCOME
+   WELCOME
    ============================================================ */
 
 .portal-welcome {
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 .portal-label {
   display: block;
 
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 
-  font-size: 8px;
+  font-size: 10px;
   line-height: 1;
 
   font-weight: 600;
 
-  letter-spacing: 0.8px;
+  letter-spacing: 0.7px;
 
   color: #334155;
 }
 
 .portal-welcome h2 {
-  margin: 0 0 4px;
+  margin: 0 0 5px;
 
-  font-size: 21px;
+  font-size: 25px;
   line-height: 1.15;
 
   font-weight: 700;
@@ -300,8 +297,10 @@ button {
 .portal-welcome p {
   margin: 0;
 
-  font-size: 10px;
+  font-size: 12px;
   line-height: 1.4;
+
+  font-weight: 400;
 
   color: #64748b;
 }
@@ -316,7 +315,7 @@ button {
 
   flex-direction: column;
 
-  gap: 9px;
+  gap: 11px;
 }
 
 
@@ -328,15 +327,15 @@ button {
   position: relative;
 
   width: 100%;
-  min-height: 66px;
+  min-height: 82px;
 
   display: flex;
   align-items: center;
 
-  padding: 10px 13px;
+  padding: 13px 17px;
 
   border: none;
-  border-radius: 13px;
+  border-radius: 14px;
 
   color: #ffffff;
 
@@ -346,27 +345,30 @@ button {
 
   overflow: hidden;
 
-  font-family: inherit;
+  font-family: "Inter", "Segoe UI", Arial, sans-serif;
 
   box-shadow:
-    0 7px 17px rgba(15, 23, 42, 0.10);
+    0 8px 18px rgba(15, 23, 42, 0.10);
 
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease,
-    filter 0.2s ease;
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    filter 0.22s ease;
 }
+
+
+/* Decorative circle */
 
 .portal-card::after {
   content: "";
 
   position: absolute;
 
-  width: 115px;
-  height: 115px;
+  width: 125px;
+  height: 125px;
 
-  right: -42px;
-  top: -42px;
+  right: -45px;
+  top: -45px;
 
   border-radius: 50%;
 
@@ -377,24 +379,33 @@ button {
     background 0.3s ease;
 }
 
+
+/* Hover */
+
 .portal-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-3px) scale(1.01);
 
   box-shadow:
-    0 12px 24px rgba(15, 23, 42, 0.15);
+    0 14px 28px rgba(15, 23, 42, 0.16);
 
   filter: brightness(1.04);
 }
 
 .portal-card:hover::after {
-  transform: scale(1.3);
+  transform: scale(1.35);
 
   background: rgba(255, 255, 255, 0.14);
 }
 
+
+/* Active */
+
 .portal-card:active {
   transform: scale(0.985);
 }
+
+
+/* Keyboard */
 
 .portal-card:focus-visible {
   outline: 3px solid rgba(37, 99, 235, 0.35);
@@ -458,11 +469,10 @@ button {
 
 .portal-icon {
   position: relative;
-
   z-index: 2;
 
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
 
   display: flex;
   align-items: center;
@@ -470,15 +480,15 @@ button {
 
   flex-shrink: 0;
 
-  border-radius: 10px;
+  border-radius: 11px;
 
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.94);
 
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.45),
-    0 3px 8px rgba(15, 23, 42, 0.08);
+    0 4px 10px rgba(15, 23, 42, 0.08);
 
-  font-size: 21px;
+  font-size: 25px;
 
   line-height: 1;
 }
@@ -490,7 +500,6 @@ button {
 
 .portal-content {
   position: relative;
-
   z-index: 2;
 
   display: flex;
@@ -500,27 +509,31 @@ button {
 
   min-width: 0;
 
-  margin-left: 11px;
+  margin-left: 14px;
 
-  gap: 3px;
+  gap: 4px;
 }
 
 .portal-content h2 {
   margin: 0;
 
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.2;
 
   font-weight: 700;
 
   color: #ffffff;
+
+  letter-spacing: -0.1px;
 }
 
 .portal-content p {
   margin: 0;
 
-  font-size: 8px;
+  font-size: 10px;
   line-height: 1.3;
+
+  font-weight: 400;
 
   color: rgba(255, 255, 255, 0.92);
 }
@@ -532,12 +545,11 @@ button {
 
 .portal-arrow {
   position: relative;
-
   z-index: 2;
 
-  margin-left: 8px;
+  margin-left: 10px;
 
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1;
 
   font-weight: 300;
@@ -558,11 +570,11 @@ button {
    ============================================================ */
 
 .portal-message {
-  margin-top: 12px;
+  margin-top: 15px;
 
-  padding: 9px 11px;
+  padding: 11px 13px;
 
-  border-radius: 7px;
+  border-radius: 8px;
 
   background: #fff1f2;
 
@@ -570,7 +582,7 @@ button {
 
   color: #be123c;
 
-  font-size: 9px;
+  font-size: 11px;
 }
 
 
@@ -579,17 +591,17 @@ button {
    ============================================================ */
 
 .portal-footer {
-  margin-top: 14px;
+  margin-top: 18px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  gap: 4px;
+  gap: 5px;
 
   text-align: center;
 
-  font-size: 8px;
+  font-size: 10px;
 
   line-height: 1.3;
 
@@ -608,15 +620,10 @@ button {
 
 
 /* ============================================================
-   ============================================================
-   AUTHENTICATION PAGE
-   ============================================================
+   AUTH PAGE
    ============================================================ */
 
 .auth-page {
-  position: relative;
-
-  width: 100%;
   min-height: 100vh;
 
   display: flex;
@@ -625,43 +632,31 @@ button {
 
   padding: 20px;
 
-  overflow: hidden;
-
   background-image:
     linear-gradient(
-      rgba(255, 255, 255, 0.35) 1px,
+      rgba(255, 255, 255, 0.30) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.35) 1px,
+      rgba(255, 255, 255, 0.30) 1px,
       transparent 1px
     ),
     radial-gradient(
-      circle at 15% 15%,
-      rgba(99, 102, 241, 0.20),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 85% 18%,
-      rgba(168, 85, 247, 0.16),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 20% 85%,
-      rgba(14, 165, 233, 0.16),
+      circle at 20% 20%,
+      rgba(99, 102, 241, 0.18),
       transparent 32%
     ),
     radial-gradient(
-      circle at 85% 85%,
-      rgba(20, 184, 166, 0.18),
+      circle at 80% 80%,
+      rgba(20, 184, 166, 0.14),
       transparent 32%
     ),
     linear-gradient(
       135deg,
-      #f7f9ff 0%,
-      #edf3ff 45%,
-      #eefcfb 100%
+      #f7f9ff,
+      #edf4ff,
+      #f0fdfa
     );
 
   background-size:
@@ -669,66 +664,7 @@ button {
     45px 45px,
     auto,
     auto,
-    auto,
-    auto,
     auto;
-}
-
-
-/* ============================================================
-   AUTH DECORATIVE LIGHT
-   ============================================================ */
-
-.auth-page::before {
-  content: "";
-
-  position: absolute;
-
-  width: 500px;
-  height: 500px;
-
-  top: -250px;
-  right: -180px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(99, 102, 241, 0.18),
-      rgba(99, 102, 241, 0.04) 55%,
-      transparent 72%
-    );
-
-  filter: blur(10px);
-
-  pointer-events: none;
-}
-
-.auth-page::after {
-  content: "";
-
-  position: absolute;
-
-  width: 480px;
-  height: 480px;
-
-  bottom: -250px;
-  left: -180px;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(20, 184, 166, 0.16),
-      rgba(14, 165, 233, 0.05) 55%,
-      transparent 72%
-    );
-
-  filter: blur(12px);
-
-  pointer-events: none;
 }
 
 
@@ -737,43 +673,36 @@ button {
    ============================================================ */
 
 .auth-card {
-  position: relative;
-
-  z-index: 2;
-
   width: 100%;
   max-width: 380px;
 
-  padding: 24px 24px 20px;
+  padding: 28px;
 
-  background: rgba(255, 255, 255, 0.96);
+  background: rgba(255, 255, 255, 0.97);
 
-  border: 1px solid rgba(255, 255, 255, 0.90);
+  border: 1px solid rgba(255, 255, 255, 0.85);
 
-  border-radius: 15px;
+  border-radius: 16px;
 
   box-shadow:
-    0 18px 45px rgba(15, 23, 42, 0.12);
+    0 20px 50px rgba(15, 23, 42, 0.12);
 
   backdrop-filter: blur(12px);
-
-  -webkit-backdrop-filter: blur(12px);
 }
 
 
 /* ============================================================
-   AUTH BRAND
+   BRAND
    ============================================================ */
 
-.auth-card .brand {
+.brand {
   display: flex;
-
   align-items: center;
 
   gap: 10px;
 }
 
-.auth-card .brand-icon {
+.brand-icon {
   width: 38px;
   height: 38px;
 
@@ -794,9 +723,8 @@ button {
 
   color: #ffffff;
 
-  font-size: 14px;
-
   font-weight: 800;
+  font-size: 19px;
 
   line-height: 1;
 
@@ -804,30 +732,28 @@ button {
     0 6px 14px rgba(37, 99, 235, 0.22);
 }
 
-.auth-card .brand h1 {
+.brand h1 {
   margin: 0;
 
-  color: #172033;
-
-  font-size: 15px;
-
+  font-size: 16px;
   line-height: 1.2;
 
   font-weight: 700;
+
+  color: #172033;
 }
 
-.auth-card .brand span {
+.brand span {
   display: block;
 
   margin-top: 3px;
 
-  color: #64748b;
-
-  font-size: 9px;
-
+  font-size: 10px;
   line-height: 1.2;
 
   font-weight: 400;
+
+  color: #64748b;
 }
 
 
@@ -836,19 +762,18 @@ button {
    ============================================================ */
 
 .auth-heading {
-  margin: 20px 0 16px;
+  margin: 24px 0 18px;
 }
 
 .auth-heading h2 {
-  margin: 0 0 6px;
+  margin: 0 0 7px;
 
-  color: #172033;
-
-  font-size: 22px;
-
+  font-size: 23px;
   line-height: 1.2;
 
   font-weight: 700;
+
+  color: #172033;
 
   letter-spacing: -0.4px;
 }
@@ -858,43 +783,38 @@ button {
 
   color: #64748b;
 
-  font-size: 10px;
-
-  line-height: 1.45;
+  font-size: 12px;
+  line-height: 1.4;
 
   font-weight: 400;
 }
 
 
 /* ============================================================
-   AUTH FORM
+   FORM
    ============================================================ */
 
 .field {
-  margin-bottom: 13px;
+  margin-bottom: 15px;
 }
 
 .field label {
   display: block;
 
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 
-  color: #334155;
-
-  font-size: 9px;
-
+  font-size: 11px;
   line-height: 1.2;
 
   font-weight: 600;
+
+  color: #334155;
 }
 
 .field input {
-  display: block;
-
   width: 100%;
-  height: 38px;
 
-  padding: 0 11px;
+  padding: 11px 12px;
 
   border: 1px solid #cbd5e1;
 
@@ -902,19 +822,18 @@ button {
 
   outline: none;
 
+  font-size: 12px;
+  line-height: 1.3;
+
+  font-weight: 400;
+
   background: #ffffff;
 
   color: #172033;
 
-  font-family: inherit;
-
-  font-size: 10px;
-
-  line-height: 1.2;
-
   transition:
-    border-color 0.18s ease,
-    box-shadow 0.18s ease;
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .field input::placeholder {
@@ -922,10 +841,10 @@ button {
 }
 
 .field input:focus {
-  border-color: #4f46e5;
+  border-color: #2563eb;
 
   box-shadow:
-    0 0 0 3px rgba(79, 70, 229, 0.10);
+    0 0 0 3px rgba(37, 99, 235, 0.10);
 }
 
 
@@ -934,18 +853,13 @@ button {
    ============================================================ */
 
 .primary-button {
-  display: block;
-
   width: 100%;
-  height: 38px;
-
-  margin-top: 1px;
-
-  padding: 0;
 
   border: none;
 
   border-radius: 7px;
+
+  padding: 11px;
 
   background:
     linear-gradient(
@@ -956,36 +870,23 @@ button {
 
   color: #ffffff;
 
-  font-family: inherit;
-
-  font-size: 10px;
-
-  line-height: 1;
+  font-size: 12px;
+  line-height: 1.2;
 
   font-weight: 600;
 
   cursor: pointer;
 
-  box-shadow:
-    0 5px 12px rgba(37, 99, 235, 0.14);
-
   transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    filter 0.18s ease;
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .primary-button:hover {
   transform: translateY(-1px);
 
-  filter: brightness(1.03);
-
   box-shadow:
-    0 8px 18px rgba(37, 99, 235, 0.20);
-}
-
-.primary-button:active {
-  transform: scale(0.985);
+    0 6px 14px rgba(37, 99, 235, 0.22);
 }
 
 .primary-button:disabled {
@@ -994,25 +895,21 @@ button {
   cursor: not-allowed;
 
   transform: none;
-
-  box-shadow: none;
 }
 
 
 /* ============================================================
-   AUTH ALERTS
+   ALERTS
    ============================================================ */
 
 .alert {
-  padding: 9px 11px;
-
-  margin-bottom: 13px;
+  padding: 10px 12px;
 
   border-radius: 7px;
 
-  font-size: 9px;
+  margin-bottom: 15px;
 
-  line-height: 1.4;
+  font-size: 11px;
 }
 
 .alert.error {
@@ -1037,38 +934,28 @@ button {
    ============================================================ */
 
 .auth-switch {
-  margin-top: 15px;
+  margin-top: 18px;
 
   text-align: center;
 
   color: #64748b;
 
-  font-size: 9px;
-
-  line-height: 1.4;
+  font-size: 11px;
 }
 
 .auth-switch button {
-  margin: 0;
-  padding: 0;
-
   border: none;
 
-  background: transparent;
+  background: none;
+
+  padding: 0;
 
   color: #2563eb;
 
-  font-family: inherit;
-
-  font-size: 9px;
-
-  font-weight: 600;
-
   cursor: pointer;
-}
 
-.auth-switch button:hover {
-  text-decoration: underline;
+  font-size: 11px;
+  font-weight: 600;
 }
 
 
@@ -1076,53 +963,35 @@ button {
    BACK TO PORTALS
    ============================================================ */
 
-.back-portal-button {
-  display: block;
+.back-button {
+  margin-top: 12px;
 
-  margin: 13px auto 0;
+  border: 1px solid #cbd5e1;
 
-  padding: 0;
+  background: #ffffff;
 
-  border: none;
+  color: #334155;
 
-  background: transparent;
+  border-radius: 6px;
 
-  color: #475569;
+  padding: 7px 11px;
 
-  font-family: inherit;
-
-  font-size: 9px;
-
-  line-height: 1.4;
+  font-size: 10px;
 
   font-weight: 500;
 
   cursor: pointer;
-
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
 }
 
-.back-portal-button:hover {
-  color: #2563eb;
+.back-button:hover {
+  background: #f8fafc;
 
-  transform: translateX(-2px);
-}
-
-.back-portal-button:focus-visible {
-  outline: 2px solid rgba(37, 99, 235, 0.35);
-
-  outline-offset: 4px;
-
-  border-radius: 4px;
+  border-color: #94a3b8;
 }
 
 
 /* ============================================================
-   ============================================================
    DASHBOARD
-   ============================================================
    ============================================================ */
 
 .dashboard {
@@ -1143,11 +1012,15 @@ button {
 
 
 /* ============================================================
-   DASHBOARD TOPBAR
+   TOP BAR
    ============================================================ */
 
 .topbar {
   height: 64px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  border-bottom: 1px solid #e2e8f0;
 
   display: flex;
   align-items: center;
@@ -1155,86 +1028,25 @@ button {
 
   padding: 0 48px;
 
-  background: rgba(255, 255, 255, 0.94);
-
-  border-bottom: 1px solid #e2e8f0;
-
   backdrop-filter: blur(10px);
 }
 
-.topbar .brand {
-  display: flex;
-
-  align-items: center;
-
-  gap: 10px;
-}
-
-.topbar .brand-icon {
-  width: 38px;
-  height: 38px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 9px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #2563eb,
-      #4f46e5
-    );
-
-  color: #ffffff;
-
-  font-size: 14px;
-
-  font-weight: 800;
-}
-
-.topbar .brand h1 {
-  margin: 0;
-
-  font-size: 15px;
-
-  color: #172033;
-}
-
-.topbar .brand span {
-  display: block;
-
-  margin-top: 2px;
-
-  font-size: 9px;
-
-  color: #64748b;
-}
-
-
-/* ============================================================
-   PROFILE
-   ============================================================ */
-
 .profile {
   display: flex;
-
   align-items: center;
 
-  gap: 14px;
+  gap: 15px;
 }
 
 .profile-info {
   display: flex;
-
   flex-direction: column;
 
   text-align: right;
 }
 
 .profile-info strong {
-  font-size: 11px;
+  font-size: 12px;
 
   font-weight: 600;
 }
@@ -1242,25 +1054,23 @@ button {
 .profile-info span {
   margin-top: 2px;
 
-  font-size: 8px;
+  font-size: 9px;
 
   color: #64748b;
 }
 
 .logout-button {
-  padding: 7px 11px;
+  background: #ffffff;
 
   border: 1px solid #cbd5e1;
 
   border-radius: 6px;
 
-  background: #ffffff;
-
-  color: #334155;
+  padding: 7px 12px;
 
   cursor: pointer;
 
-  font-size: 9px;
+  font-size: 10px;
 
   transition:
     background 0.15s ease,
@@ -1279,7 +1089,6 @@ button {
    ============================================================ */
 
 .dashboard-content {
-  width: 100%;
   max-width: 1100px;
 
   margin: 0 auto;
@@ -1287,14 +1096,8 @@ button {
   padding: 35px 24px;
 }
 
-
-/* ============================================================
-   DASHBOARD WELCOME
-   ============================================================ */
-
 .welcome {
   display: flex;
-
   align-items: flex-start;
   justify-content: space-between;
 
@@ -1335,13 +1138,13 @@ button {
    ============================================================ */
 
 .task-panel {
-  padding: 20px;
-
   background: rgba(255, 255, 255, 0.96);
 
   border: 1px solid #e2e8f0;
 
   border-radius: 13px;
+
+  padding: 20px;
 
   box-shadow:
     0 8px 25px rgba(15, 23, 42, 0.05);
@@ -1386,19 +1189,10 @@ button {
   border-radius: 7px;
 
   outline: none;
-
-  background: #ffffff;
-
-  color: #172033;
-
-  font-size: 11px;
 }
 
 .task-form input:focus {
   border-color: #2563eb;
-
-  box-shadow:
-    0 0 0 3px rgba(37, 99, 235, 0.08);
 }
 
 .task-form button {
@@ -1413,10 +1207,6 @@ button {
   color: #ffffff;
 
   cursor: pointer;
-
-  font-size: 10px;
-
-  font-weight: 600;
 }
 
 
@@ -1447,11 +1237,11 @@ button {
 .stats-card span {
   display: block;
 
-  margin-bottom: 5px;
-
   color: #64748b;
 
   font-size: 9px;
+
+  margin-bottom: 5px;
 }
 
 .stats-card strong {
@@ -1466,10 +1256,13 @@ button {
    ============================================================ */
 
 .empty-state {
+  border: 1px dashed #cbd5e1;
+
+  border-radius: 10px;
+
   min-height: 180px;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
@@ -1478,25 +1271,21 @@ button {
   text-align: center;
 
   background: #fbfdff;
-
-  border: 1px dashed #cbd5e1;
-
-  border-radius: 10px;
 }
 
 .empty-icon {
   width: 35px;
   height: 35px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
   border-radius: 50%;
 
   background: #eff6ff;
 
   color: #2563eb;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .empty-state h3 {
@@ -1522,12 +1311,12 @@ button {
   list-style: none;
 
   padding: 0;
+
   margin: 0;
 }
 
 .task-list li {
   display: flex;
-
   align-items: center;
   justify-content: space-between;
 
@@ -1557,13 +1346,13 @@ button {
 }
 
 .task-actions button {
-  padding: 6px 9px;
-
   border: 1px solid #cbd5e1;
+
+  background: #ffffff;
 
   border-radius: 5px;
 
-  background: #ffffff;
+  padding: 6px 9px;
 
   font-size: 10px;
 
@@ -1587,19 +1376,15 @@ button {
 
 
 /* ============================================================
-   ============================================================
    MOBILE
-   ============================================================
    ============================================================ */
 
 @media (max-width: 650px) {
 
-  /* Portal */
-
   .portal-page {
     align-items: flex-start;
 
-    padding: 28px 14px 30px;
+    padding: 30px 14px 35px;
   }
 
   .portal-container {
@@ -1607,87 +1392,53 @@ button {
   }
 
   .portal-header {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
   }
 
   .portal-logo {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 
   .portal-header h1 {
-    font-size: 18px;
+    font-size: 19px;
   }
 
   .portal-welcome h2 {
-    font-size: 21px;
+    font-size: 22px;
   }
 
   .portal-card {
-    min-height: 64px;
+    min-height: 74px;
 
-    padding: 9px 12px;
+    padding: 11px 13px;
   }
 
   .portal-icon {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
 
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .portal-content {
-    margin-left: 10px;
+    margin-left: 11px;
   }
 
   .portal-content h2 {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .portal-content p {
-    font-size: 8px;
+    font-size: 9px;
   }
 
   .portal-arrow {
-    font-size: 21px;
+    font-size: 22px;
   }
-
-  .portal-footer {
-    flex-direction: column;
-
-    gap: 2px;
-
-    margin-top: 14px;
-
-    font-size: 8px;
-  }
-
-
-  /* Auth */
-
-  .auth-page {
-    align-items: center;
-
-    padding: 20px 14px;
-  }
-
-  .auth-card {
-    max-width: 380px;
-
-    padding: 23px 20px 19px;
-
-    border-radius: 14px;
-  }
-
-
-  /* Dashboard */
 
   .topbar {
-    height: auto;
-
-    min-height: 64px;
-
-    padding: 12px 18px;
+    padding: 0 18px;
   }
 
   .dashboard-content {
@@ -1723,6 +1474,16 @@ button {
   .task-actions button {
     flex: 1;
   }
+
+  .portal-footer {
+    flex-direction: column;
+
+    gap: 2px;
+
+    margin-top: 16px;
+
+    font-size: 9px;
+  }
 }
 
 
@@ -1738,38 +1499,29 @@ button {
   }
 
   .portal-card {
-    min-height: 62px;
+    min-height: 70px;
   }
 
   .portal-icon {
-    width: 38px;
-    height: 38px;
+    width: 40px;
+    height: 40px;
 
-    font-size: 19px;
-  }
-
-  .portal-content h2 {
-    font-size: 11px;
-  }
-
-  .portal-content p {
-    font-size: 7px;
-  }
-
-  .portal-header h1 {
-    font-size: 17px;
-  }
-
-  .portal-welcome h2 {
     font-size: 20px;
   }
 
-
-  .auth-card {
-    padding: 21px 18px 18px;
+  .portal-content h2 {
+    font-size: 12px;
   }
 
-  .auth-heading h2 {
+  .portal-content p {
+    font-size: 8px;
+  }
+
+  .portal-header h1 {
+    font-size: 18px;
+  }
+
+  .portal-welcome h2 {
     font-size: 21px;
   }
 }

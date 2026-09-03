@@ -22,26 +22,17 @@ const TASK_API = "http://localhost:5000/api/tasks";
 function App() {
   const path = window.location.pathname;
 
-  // ----------------------------------------------------------
-  // PORTAL SELECTION
-  // ----------------------------------------------------------
-
+  // Portal selection
   if (path === "/") {
     return <PortalSelection />;
   }
 
-  // ----------------------------------------------------------
-  // NTC PORTAL
-  // ----------------------------------------------------------
-
+  // NTC portal
   if (path === "/ntc") {
     return <TaskManagerApp />;
   }
 
-  // ----------------------------------------------------------
-  // UNKNOWN ROUTE
-  // ----------------------------------------------------------
-
+  // Unknown route
   return <PortalSelection />;
 }
 
@@ -71,7 +62,7 @@ function TaskManagerApp() {
   const [authMode, setAuthMode] = useState("login");
 
   // ==========================================================
-  // AUTH FORM STATE
+  // AUTH FORM
   // ==========================================================
 
   const [name, setName] = useState("");
@@ -85,10 +76,6 @@ function TaskManagerApp() {
   const [tasks, setTasks] = useState([]);
   const [taskTitle, setTaskTitle] = useState("");
 
-  // ==========================================================
-  // UI STATE
-  // ==========================================================
-
   const [loading, setLoading] = useState(false);
   const [taskLoading, setTaskLoading] = useState(false);
 
@@ -96,12 +83,11 @@ function TaskManagerApp() {
   const [success, setSuccess] = useState("");
 
   // ==========================================================
-  // SAVE AUTHENTICATION DATA
+  // SAVE AUTH DATA
   // ==========================================================
 
   const saveAuth = (authToken, authUser) => {
     localStorage.setItem("taskmanager_token", authToken);
-
     localStorage.setItem(
       "taskmanager_user",
       JSON.stringify(authUser)
@@ -146,14 +132,11 @@ function TaskManagerApp() {
     setUser(null);
     setTasks([]);
 
-    setError("");
-    setSuccess("");
-
     window.location.href = "/";
   };
 
   // ==========================================================
-  // AUTHENTICATION
+  // AUTH SUBMIT
   // ==========================================================
 
   const handleAuth = async (event) => {
@@ -166,10 +149,6 @@ function TaskManagerApp() {
     try {
       let response;
 
-      // ------------------------------------------------------
-      // REGISTER
-      // ------------------------------------------------------
-
       if (authMode === "register") {
         response = await axios.post(
           `${AUTH_API}/register`,
@@ -179,13 +158,7 @@ function TaskManagerApp() {
             password,
           }
         );
-      }
-
-      // ------------------------------------------------------
-      // LOGIN
-      // ------------------------------------------------------
-
-      else {
+      } else {
         response = await axios.post(
           `${AUTH_API}/login`,
           {
@@ -195,26 +168,14 @@ function TaskManagerApp() {
         );
       }
 
-      // ------------------------------------------------------
-      // SAVE AUTH DATA
-      // ------------------------------------------------------
-
       saveAuth(
         response.data.token,
         response.data.user
       );
 
-      // ------------------------------------------------------
-      // CLEAR FORM
-      // ------------------------------------------------------
-
       setName("");
       setEmail("");
       setPassword("");
-
-      // ------------------------------------------------------
-      // SUCCESS MESSAGE
-      // ------------------------------------------------------
 
       setSuccess(
         authMode === "register"
@@ -222,10 +183,7 @@ function TaskManagerApp() {
           : "Login successful."
       );
     } catch (err) {
-      console.error(
-        "Authentication error:",
-        err
-      );
+      console.error("Authentication error:", err);
 
       setError(
         err.response?.data?.message ||
@@ -249,34 +207,19 @@ function TaskManagerApp() {
     setError("");
 
     try {
-      const response = await axios.get(
-        TASK_API,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.get(TASK_API, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setTasks(response.data);
     } catch (err) {
-      console.error(
-        "Error fetching tasks:",
-        err
-      );
-
-      // ------------------------------------------------------
-      // SESSION EXPIRED
-      // ------------------------------------------------------
+      console.error("Error fetching tasks:", err);
 
       if (err.response?.status === 401) {
-        localStorage.removeItem(
-          "taskmanager_token"
-        );
-
-        localStorage.removeItem(
-          "taskmanager_user"
-        );
+        localStorage.removeItem("taskmanager_token");
+        localStorage.removeItem("taskmanager_user");
 
         setToken("");
         setUser(null);
@@ -285,16 +228,8 @@ function TaskManagerApp() {
         setError(
           "Your session has expired. Please login again."
         );
-      }
-
-      // ------------------------------------------------------
-      // OTHER ERROR
-      // ------------------------------------------------------
-
-      else {
-        setError(
-          "Unable to load your tasks."
-        );
+      } else {
+        setError("Unable to load your tasks.");
       }
     } finally {
       setTaskLoading(false);
@@ -342,14 +277,9 @@ function TaskManagerApp() {
 
       await fetchTasks();
 
-      setSuccess(
-        "Task created successfully."
-      );
+      setSuccess("Task created successfully.");
     } catch (err) {
-      console.error(
-        "Error adding task:",
-        err
-      );
+      console.error("Error adding task:", err);
 
       setError(
         err.response?.data?.message ||
@@ -379,10 +309,7 @@ function TaskManagerApp() {
 
       await fetchTasks();
     } catch (err) {
-      console.error(
-        "Error updating task:",
-        err
-      );
+      console.error("Error updating task:", err);
 
       setError(
         err.response?.data?.message ||
@@ -411,10 +338,7 @@ function TaskManagerApp() {
 
       await fetchTasks();
     } catch (err) {
-      console.error(
-        "Error deleting task:",
-        err
-      );
+      console.error("Error deleting task:", err);
 
       setError(
         err.response?.data?.message ||
@@ -430,41 +354,20 @@ function TaskManagerApp() {
   if (!user || !token) {
     return (
       <div className="auth-page">
-
-        {/* ==================================================
-            AUTH CARD
-            ================================================== */}
-
         <div className="auth-card">
 
-          {/* ==================================================
-              BRAND
-              ================================================== */}
-
+          {/* BRAND */}
           <div className="brand">
-
-            <div className="brand-icon">
-              NTC
-            </div>
+            <div className="brand-icon">✓</div>
 
             <div>
-              <h1>
-                TaskManager
-              </h1>
-
-              <span>
-                NTC Productivity Platform
-              </span>
+              <h1>TaskManager</h1>
+              <span>NTC Productivity Platform</span>
             </div>
-
           </div>
 
-          {/* ==================================================
-              AUTH HEADING
-              ================================================== */}
-
+          {/* HEADING */}
           <div className="auth-heading">
-
             <h2>
               {authMode === "login"
                 ? "Welcome back"
@@ -476,48 +379,31 @@ function TaskManagerApp() {
                 ? "Login to access your NTC tasks and dashboard."
                 : "Register to access the NTC productivity platform."}
             </p>
-
           </div>
 
-          {/* ==================================================
-              ERROR MESSAGE
-              ================================================== */}
-
+          {/* ERROR */}
           {error && (
             <div className="alert error">
               {error}
             </div>
           )}
 
-          {/* ==================================================
-              SUCCESS MESSAGE
-              ================================================== */}
-
+          {/* SUCCESS */}
           {success && (
             <div className="alert success">
               {success}
             </div>
           )}
 
-          {/* ==================================================
-              AUTH FORM
-              ================================================== */}
-
+          {/* FORM */}
           <form onSubmit={handleAuth}>
 
-            {/* ==================================================
-                NAME
-                ================================================== */}
-
+            {/* NAME */}
             {authMode === "register" && (
               <div className="field">
-
-                <label htmlFor="name">
-                  Full Name
-                </label>
+                <label>Full Name</label>
 
                 <input
-                  id="name"
                   type="text"
                   placeholder="Enter your name"
                   value={name}
@@ -526,22 +412,14 @@ function TaskManagerApp() {
                   }
                   required
                 />
-
               </div>
             )}
 
-            {/* ==================================================
-                EMAIL
-                ================================================== */}
-
+            {/* EMAIL */}
             <div className="field">
-
-              <label htmlFor="email">
-                Email Address
-              </label>
+              <label>Email Address</label>
 
               <input
-                id="email"
                 type="email"
                 placeholder="you@example.com"
                 value={email}
@@ -550,21 +428,13 @@ function TaskManagerApp() {
                 }
                 required
               />
-
             </div>
 
-            {/* ==================================================
-                PASSWORD
-                ================================================== */}
-
+            {/* PASSWORD */}
             <div className="field">
-
-              <label htmlFor="password">
-                Password
-              </label>
+              <label>Password</label>
 
               <input
-                id="password"
                 type="password"
                 placeholder="Minimum 6 characters"
                 value={password}
@@ -574,13 +444,9 @@ function TaskManagerApp() {
                 minLength={6}
                 required
               />
-
             </div>
 
-            {/* ==================================================
-                SUBMIT BUTTON
-                ================================================== */}
-
+            {/* SUBMIT */}
             <button
               className="primary-button"
               type="submit"
@@ -592,19 +458,13 @@ function TaskManagerApp() {
                 ? "Login"
                 : "Create Account"}
             </button>
-
           </form>
 
-          {/* ==================================================
-              AUTH MODE SWITCH
-              ================================================== */}
-
+          {/* SWITCH */}
           <div className="auth-switch">
-
             {authMode === "login" ? (
               <>
                 Don't have an account?{" "}
-
                 <button
                   type="button"
                   onClick={() => {
@@ -619,7 +479,6 @@ function TaskManagerApp() {
             ) : (
               <>
                 Already have an account?{" "}
-
                 <button
                   type="button"
                   onClick={() => {
@@ -632,13 +491,9 @@ function TaskManagerApp() {
                 </button>
               </>
             )}
-
           </div>
 
-          {/* ==================================================
-              BACK TO PORTALS
-              ================================================== */}
-
+          {/* BACK */}
           <button
             type="button"
             className="back-portal-button"
@@ -648,13 +503,12 @@ function TaskManagerApp() {
           </button>
 
         </div>
-
       </div>
     );
   }
 
   // ==========================================================
-  // DASHBOARD STATISTICS
+  // DASHBOARD STATS
   // ==========================================================
 
   const completedTasks = tasks.filter(
@@ -677,51 +531,29 @@ function TaskManagerApp() {
 
       <header className="topbar">
 
-        {/* ----------------------------------------------------
-            BRAND
-            ---------------------------------------------------- */}
-
         <div className="brand">
-
-          <div className="brand-icon">
-            NTC
-          </div>
+          <div className="brand-icon">✓</div>
 
           <div>
-            <h1>
-              TaskManager
-            </h1>
-
-            <span>
-              NTC Productivity Platform
-            </span>
+            <h1>TaskManager</h1>
+            <span>NTC Productivity Platform</span>
           </div>
-
         </div>
-
-        {/* ----------------------------------------------------
-            PROFILE
-            ---------------------------------------------------- */}
 
         <div className="profile">
 
           <div className="profile-info">
-
-            <strong>
-              {user.name}
-            </strong>
+            <strong>{user.name}</strong>
 
             <span>
               {user.role === "admin"
                 ? "Administrator"
                 : "NTC Staff"}
             </span>
-
           </div>
 
           <button
             className="logout-button"
-            type="button"
             onClick={logout}
           >
             Logout
@@ -732,19 +564,15 @@ function TaskManagerApp() {
       </header>
 
       {/* ======================================================
-          MAIN CONTENT
+          MAIN
           ====================================================== */}
 
       <main className="dashboard-content">
 
-        {/* ====================================================
-            WELCOME SECTION
-            ==================================================== */}
-
+        {/* WELCOME */}
         <div className="welcome">
 
           <div>
-
             <p className="eyebrow">
               NTC DASHBOARD
             </p>
@@ -758,41 +586,23 @@ function TaskManagerApp() {
                 ? "Manage staff tasks and monitor team progress."
                 : "View your assigned tasks and track your progress."}
             </p>
-
           </div>
 
-          {/* --------------------------------------------------
-              TOTAL TASKS
-              -------------------------------------------------- */}
-
           <div className="stats-card">
-
-            <span>
-              Total Tasks
-            </span>
-
-            <strong>
-              {tasks.length}
-            </strong>
-
+            <span>Total Tasks</span>
+            <strong>{tasks.length}</strong>
           </div>
 
         </div>
 
-        {/* ====================================================
-            ERROR
-            ==================================================== */}
-
+        {/* ERROR */}
         {error && (
           <div className="alert error">
             {error}
           </div>
         )}
 
-        {/* ====================================================
-            SUCCESS
-            ==================================================== */}
-
+        {/* SUCCESS */}
         {success && (
           <div className="alert success">
             {success}
@@ -804,10 +614,6 @@ function TaskManagerApp() {
             ==================================================== */}
 
         <section className="task-panel">
-
-          {/* --------------------------------------------------
-              PANEL HEADER
-              -------------------------------------------------- */}
 
           <div className="panel-header">
 
@@ -826,15 +632,19 @@ function TaskManagerApp() {
           </div>
 
           {/* ==================================================
-              ADMIN TASK CREATION
-              ================================================== */}
+              TEMPORARY ADMIN TASK CREATION
+              ==================================================
+
+              Backend currently creates tasks for req.user.
+              We will replace this with proper admin assignment
+              after the basic portal flow is confirmed.
+          ================================================== */}
 
           {user.role === "admin" && (
             <form
               className="task-form"
               onSubmit={addTask}
             >
-
               <input
                 type="text"
                 placeholder="Create a new NTC task..."
@@ -847,63 +657,50 @@ function TaskManagerApp() {
               <button type="submit">
                 Create Task
               </button>
-
             </form>
           )}
 
           {/* ==================================================
-              TASK STATISTICS
+              STATS
               ================================================== */}
 
-          <div className="dashboard-stats">
+          <div
+            style={{
+              display: "flex",
+              gap: "12px",
+              marginBottom: "20px",
+              flexWrap: "wrap",
+            }}
+          >
 
             <div className="stats-card">
-
-              <span>
-                Pending
-              </span>
-
-              <strong>
-                {pendingTasks}
-              </strong>
-
+              <span>Pending</span>
+              <strong>{pendingTasks}</strong>
             </div>
 
             <div className="stats-card">
-
-              <span>
-                Completed
-              </span>
-
-              <strong>
-                {completedTasks}
-              </strong>
-
+              <span>Completed</span>
+              <strong>{completedTasks}</strong>
             </div>
 
           </div>
 
           {/* ==================================================
-              TASK CONTENT
+              TASKS
               ================================================== */}
 
           {taskLoading ? (
-
             <div className="loading">
               Loading tasks...
             </div>
-
           ) : tasks.length === 0 ? (
-
             <div className="empty-state">
 
               <div className="empty-icon">
                 ✓
               </div>
 
-              <h3>
-                No tasks yet
-              </h3>
+              <h3>No tasks yet</h3>
 
               <p>
                 {user.role === "admin"
@@ -912,38 +709,29 @@ function TaskManagerApp() {
               </p>
 
             </div>
-
           ) : (
-
             <ul className="task-list">
 
               {tasks.map((task) => (
-
                 <li
                   key={task._id}
                   className={
-                    task.completed
-                      ? "done"
-                      : ""
+                    task.completed ? "done" : ""
                   }
                 >
-
-                  {/* ------------------------------------------------
-                      TASK TITLE
-                      ------------------------------------------------ */}
 
                   <span>
                     {task.title}
                   </span>
 
-                  {/* ------------------------------------------------
-                      TASK ACTIONS
-                      ------------------------------------------------ */}
-
-                  <div className="task-actions">
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "8px",
+                    }}
+                  >
 
                     <button
-                      type="button"
                       onClick={() =>
                         toggleTask(task._id)
                       }
@@ -955,7 +743,6 @@ function TaskManagerApp() {
 
                     {user.role === "admin" && (
                       <button
-                        type="button"
                         onClick={() =>
                           deleteTask(task._id)
                         }
@@ -967,17 +754,14 @@ function TaskManagerApp() {
                   </div>
 
                 </li>
-
               ))}
 
             </ul>
-
           )}
 
         </section>
 
       </main>
-
     </div>
   );
 }

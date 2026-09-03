@@ -1,21 +1,24 @@
 // ============================================================
 // FILE: backend/routes/todoRoutes.js
-// PURPOSE: CRUD API routes for TaskManager tasks
+// PURPOSE: Protected CRUD API routes for user-specific tasks
 // ============================================================
 
 const express = require("express");
 const Todo = require("../models/Todo");
+const protect = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
 // ============================================================
-// GET ALL TASKS
+// GET USER'S TASKS
 // GET /api/tasks
 // ============================================================
 
-router.get("/", async (req, res) => {
+router.get("/", protect, async (req, res) => {
   try {
-    const todos = await Todo.find().sort({ createdAt: -1 });
+    const todos = await Todo.find({
+      user: req.user.userId,
+    }).sort({ createdAt: -1 });
 
     res.json(todos);
   } catch (error) {
@@ -32,7 +35,7 @@ router.get("/", async (req, res) => {
 // POST /api/tasks
 // ============================================================
 
-router.post("/", async (req, res) => {
+router.post("/", protect, async (req, res) => {
   try {
     const { title } = req.body;
 
@@ -44,6 +47,7 @@ router.post("/", async (req, res) => {
 
     const todo = await Todo.create({
       title: title.trim(),
+      user: req.user.userId,
     });
 
     res.status(201).json(todo);
@@ -61,9 +65,12 @@ router.post("/", async (req, res) => {
 // PUT /api/tasks/:id
 // ============================================================
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", protect, async (req, res) => {
   try {
-    const todo = await Todo.findById(req.params.id);
+    const todo = await Todo.findOne({
+      _id: req.params.id,
+      user: req.user.userId,
+    });
 
     if (!todo) {
       return res.status(404).json({
@@ -90,9 +97,12 @@ router.put("/:id", async (req, res) => {
 // DELETE /api/tasks/:id
 // ============================================================
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", protect, async (req, res) => {
   try {
-    const todo = await Todo.findByIdAndDelete(req.params.id);
+    const todo = await Todo.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user.userId,
+    });
 
     if (!todo) {
       return res.status(404).json({
@@ -111,5 +121,9 @@ router.delete("/:id", async (req, res) => {
     });
   }
 });
+
+// ============================================================
+// EXPORT ROUTER
+// ============================================================
 
 module.exports = router;
