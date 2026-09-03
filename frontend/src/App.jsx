@@ -24,7 +24,7 @@ function App() {
   const hash = window.location.hash;
 
   // ----------------------------------------------------------
-  // PORTAL SELECTION
+  // MAIN NTC DIGITAL PLATFORM
   // ----------------------------------------------------------
 
   if (path === "/" && hash === "") {
@@ -32,7 +32,7 @@ function App() {
 }
 
   // ----------------------------------------------------------
-  // NTC PORTAL
+  // NTC TASK MANAGER PORTAL
   // ----------------------------------------------------------
 
   if (path === "/" && hash === "#ntcportal") {
@@ -132,7 +132,7 @@ function TaskManagerApp() {
     setError("");
     setSuccess("");
 
-    window.location.href = "/#ntc";
+    window.location.href = "/#ntcportal";
   };
 
   // ==========================================================
