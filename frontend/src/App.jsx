@@ -24,23 +24,29 @@ function App() {
   const hash = window.location.hash;
 
   // ----------------------------------------------------------
-  // MAIN NTC DIGITAL PLATFORM
+  // NTC PORTAL / TASK MANAGER
+  // Supports:
+  // /#ntcportal
+  // /ntcportal
+  // ----------------------------------------------------------
+
+  if (
+    path === "/ntcportal" ||
+    hash === "#ntcportal"
+  ) {
+    return <TaskManagerApp />;
+  }
+
+  // ----------------------------------------------------------
+  // MAIN PORTAL
   // ----------------------------------------------------------
 
   if (path === "/" && hash === "") {
-  return <PortalSelection />;
-}
+    return <PortalSelection />;
+  }
 
   // ----------------------------------------------------------
-  // NTC TASK MANAGER PORTAL
-  // ----------------------------------------------------------
-
-  if (path === "/" && hash === "#ntcportal") {
-  return <TaskManagerApp />;
-}
-
-  // ----------------------------------------------------------
-  // UNKNOWN ROUTE
+  // DEFAULT
   // ----------------------------------------------------------
 
   return <PortalSelection />;
