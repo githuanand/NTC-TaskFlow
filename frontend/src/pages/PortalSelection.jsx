@@ -12,7 +12,7 @@ function PortalSelection() {
   const openPortal = (portal) => {
 
     if (portal === "ntc") {
-      window.location.href = "/ntc";
+      window.location.href = "/#ntc";
       return;
     }
 

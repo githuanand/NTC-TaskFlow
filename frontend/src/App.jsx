@@ -21,6 +21,7 @@ const TASK_API = "http://localhost:5000/api/tasks";
 
 function App() {
   const path = window.location.pathname;
+  const hash = window.location.hash;
 
   // ----------------------------------------------------------
   // PORTAL SELECTION
@@ -34,7 +35,7 @@ function App() {
   // NTC PORTAL
   // ----------------------------------------------------------
 
-  if (path === "/ntc") {
+  if (hash === "#ntc") {
     return <TaskManagerApp />;
   }
 
@@ -131,7 +132,7 @@ function TaskManagerApp() {
     setError("");
     setSuccess("");
 
-    window.location.href = "/ntc";
+    window.location.href = "/#ntc";
   };
 
   // ==========================================================
