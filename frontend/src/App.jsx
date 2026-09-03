@@ -12,8 +12,9 @@ import PortalSelection from "./pages/PortalSelection";
 // API CONFIGURATION
 // ============================================================
 
-const AUTH_API = "http://localhost:5000/api/auth";
-const TASK_API = "http://localhost:5000/api/tasks";
+const AUTH_API = "https://ntc-task-manager-backend.onrender.com/api/auth";
+const TASK_API = "https://ntc-task-manager-backend.onrender.com/api/tasks";
+
 
 // ============================================================
 // MAIN APP
