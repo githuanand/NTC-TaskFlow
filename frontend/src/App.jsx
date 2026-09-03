@@ -21,23 +21,23 @@ const TASK_API = "http://localhost:5000/api/tasks";
 
 function App() {
   const path = window.location.pathname;
-  // const hash = window.location.hash;
+  const hash = window.location.hash;
 
   // ----------------------------------------------------------
   // PORTAL SELECTION
   // ----------------------------------------------------------
 
-  if (path === "/") {
-    return <PortalSelection />;
-  }
+  if (path === "/" && hash === "") {
+  return <PortalSelection />;
+}
 
   // ----------------------------------------------------------
   // NTC PORTAL
   // ----------------------------------------------------------
 
-  if (path === "/ntcportal") {
-    return <TaskManagerApp />;
-  }
+  if (path === "/" && hash === "#ntcportal") {
+  return <TaskManagerApp />;
+}
 
   // ----------------------------------------------------------
   // UNKNOWN ROUTE
