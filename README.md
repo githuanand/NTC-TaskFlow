@@ -4,7 +4,7 @@ NTC TaskFlow is a full-stack task management platform developed for **NTC – Na
 
 ## 🌐 Live Demo
 
-👉 [Launch NTC Task Manager](https://ntc-task-manager-frontend.vercel.app/)
+👉 [Launch NTC Task Flow](https://ntc-task-manager-frontend.vercel.app/)
 
 ## ✨ Features
 
